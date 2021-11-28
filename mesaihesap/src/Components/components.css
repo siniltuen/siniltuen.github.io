@@ -1,0 +1,19 @@
+.gunCard {
+  display: block;
+  margin-left: 5px;
+  margin-top: 150px;
+}
+
+.girisCikis {
+  border-width: 2px;
+  border-color: red;
+}
+
+.saat {
+  display: block;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 150;
+  border-width: 1px;
+  border-color: blue;
+}
