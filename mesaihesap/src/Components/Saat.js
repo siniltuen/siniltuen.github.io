@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types'
 
-
 class Saat extends Component {
 
 
@@ -22,12 +21,27 @@ class Saat extends Component {
                         step: 300, // 5 min
                     }}
                     style={{ width: 150, marginTop: 15 }}
+                    onChange={evt => this.updatedValue(evt, alanAdi)}
+
+
                 />
+
+                {console.log()}
+
+
             </div>
         );
     }
 
+    updatedValue(evt, alanAdi) {
+        const val = evt.target.value;
+        console.log(alanAdi + " " + val);
+    }
+
 }
+
+
+
 Saat.defaultProps = {
     alanAdi: "Bilgi Yok",
     defaultValue: ""

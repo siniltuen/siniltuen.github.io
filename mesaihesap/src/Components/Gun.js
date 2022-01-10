@@ -5,8 +5,97 @@ import TimePickers from './TimePicker'
 import PropTypes from 'prop-types'
 import GirisCikis from './GirisCikis'
 import { Button } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { arttir, azalt } from '../store/actions/counter';
 
+function AddGirisCikis(count, newCount, id, girisCikisListesi) {
+
+  const newArray = [...girisCikisListesi];
+  console.log("Add GirisCikis: ");
+  console.log(girisCikisListesi);
+  var i = girisCikisListesi.length;
+
+  console.log(count);
+
+  for (var j = 1; j < i + count + 1; j++) {
+    newArray.push(<GirisCikis key={j + i} number={j + i} girisCikisSayisi={j + i} id={id} />);
+
+  }
+
+  newCount = count;
+
+  console.log(newCount)
+
+  return (
+
+    newArray
+
+  );
+
+
+
+}
+
+
+function Gun(props) {
+
+  const AddGirisCikisYeni = (props) => {
+
+    console.log(props.girisCikisListesi);
+    console.log(props.count);
+
+
+
+
+  }
+
+
+
+  let girisCikisListesi = [];
+
+  const GunIcerigi = props => (
+
+    <div className="">
+      {props.girisCikisListesi}
+    </div>
+  );
+
+  const lastCount = 0;
+
+  const count = useSelector((state) => state.counter.girisCikisSayisi[props.id]);
+
+  const dispatch = useDispatch();
+
+
+
+  return (
+    <div className="card gunCard">
+
+      <div className="card-header d-flex justify-content-between">
+        <h5 className="d-inline">{props.gunAdi} </h5>
+        <i className="fas fa-undo-alt" style={{ cursor: 'pointer' }}></i>
+      </div>
+
+      <div className="card-body">
+
+        <Saat alanAdi={"Toplam Çalışma Saati " + props.gunAdi} />
+        <GunIcerigi gunAdi={props.gunAdi} girisCikisListesi={AddGirisCikisYeni(count, lastCount, props.id, girisCikisListesi)} />
+        <Button mt="5px" onClick={() => dispatch(arttir(props.id)
+        )}> Giriş Çıkış Ekle</Button>
+      </div>
+
+
+    </div>
+  );
+
+}
+
+
+/*
 class Gun extends Component {
+
+
 
   state = {
     numGirisCikis: 0
@@ -16,6 +105,9 @@ class Gun extends Component {
   };
 
   render() {
+
+    const { counter } = useSelector(state => state);
+
     const girisCikisListesi = [];
     //Destructing
     const { gunAdi } = this.props;
@@ -48,11 +140,6 @@ class Gun extends Component {
     );
   }
 
-  onAddGirisCikis = () => {
-    this.setState({
-      numGirisCikis: this.state.numGirisCikis + 1
-    });
-  }
 
 }
 
@@ -68,5 +155,7 @@ Gun.defaultProps = {
 Gun.propTypes = {
   gunAdi: PropTypes.string.isRequired
 }
+*/
+
 
 export default Gun;
