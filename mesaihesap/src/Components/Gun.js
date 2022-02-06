@@ -9,46 +9,36 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { arttir, azalt } from '../store/actions/counter';
 
-function AddGirisCikis(count, newCount, id, girisCikisListesi) {
+// function AddGirisCikis(count, newCount, id, girisCikisListesi) {
 
-  const newArray = [...girisCikisListesi];
-  console.log("Add GirisCikis: ");
-  console.log(girisCikisListesi);
-  var i = girisCikisListesi.length;
+//   const newArray = [...girisCikisListesi];
+//   console.log("Add GirisCikis: ");
+//   console.log(girisCikisListesi);
+//   var i = girisCikisListesi.length;
 
-  console.log(count);
+//   console.log(count);
 
-  for (var j = 1; j < i + count + 1; j++) {
-    newArray.push(<GirisCikis key={j + i} number={j + i} girisCikisSayisi={j + i} id={id} />);
+//   for (var j = 1; j < i + count + 1; j++) {
+//     newArray.push(<GirisCikis key={j + i} number={j + i} girisCikisSayisi={j + i} id={id} />);
 
-  }
+//   }
 
-  newCount = count;
+//   newCount = count;
 
-  console.log(newCount)
+//   console.log(newArray)
 
-  return (
+//   return (
 
-    newArray
+//     newArray
 
-  );
+//   );
 
 
 
-}
+// }
 
 
 function Gun(props) {
-
-  const AddGirisCikisYeni = (props) => {
-
-    console.log(props.girisCikisListesi);
-    console.log(props.count);
-
-
-
-
-  }
 
 
 
@@ -63,7 +53,11 @@ function Gun(props) {
 
   const lastCount = 0;
 
-  const count = useSelector((state) => state.counter.girisCikisSayisi[props.id]);
+  const count = useSelector((state) => state.counter.girisCikislar[props.id].count);
+  const girisler = useSelector((state) => state.counter.girisCikislar[props.id].girisCikisListesi);
+
+  console.log("Girisler");
+  console.log(girisler);
 
   const dispatch = useDispatch();
 
@@ -80,7 +74,7 @@ function Gun(props) {
       <div className="card-body">
 
         <Saat alanAdi={"Toplam Çalışma Saati " + props.gunAdi} />
-        <GunIcerigi gunAdi={props.gunAdi} girisCikisListesi={AddGirisCikisYeni(count, lastCount, props.id, girisCikisListesi)} />
+        <GunIcerigi gunAdi={props.gunAdi} girisCikisListesi={girisler} />
         <Button mt="5px" onClick={() => dispatch(arttir(props.id)
         )}> Giriş Çıkış Ekle</Button>
       </div>

@@ -13,7 +13,7 @@ import { arttir, azalt } from '../store/actions/counter';
 
 function GirisCikis(props) {
 
-    const count = useSelector((state) => state.counter.girisCikisSayisi[props.id]);
+    const count = useSelector((state) => state.counter.girisCikislar[props.id].count);
 
     const dispatch = useDispatch();
 
@@ -27,15 +27,15 @@ function GirisCikis(props) {
             <div className="card">
 
                 <div className="card-header d-flex">
-                    <h5 className="d-inline"> Günlük Giriş Çıkış - {girisCikisSayisi} </h5>
-                    <i className="far fa-trash-alt" style={{ cursor: 'pointer', marginLeft: 5 }} onClick={() => dispatch(azalt(props.id)
+                    <h5 className="d-inline"> Giriş Çıkış - {girisCikisSayisi} </h5>
+                    <i className="far fa-trash-alt" style={{ cursor: 'pointer', marginLeft: 5 }} onClick={() => dispatch(azalt(props)
                     )}>
                     </i>
                 </div>
 
                 <div className="card-body">
-                    <Saat alanAdi={girisAdi + girisCikisSayisi} />
-                    <Saat alanAdi={cikisAdi + girisCikisSayisi} />
+                    <Saat alanAdi={girisAdi + girisCikisSayisi} gunId={props.id} girisCikisId={girisCikisSayisi} />
+                    <Saat alanAdi={cikisAdi + girisCikisSayisi} gunId={props.id} girisCikisId={girisCikisSayisi} />
                     {/* <BasicTimePicker /> */}
                     {/* <BasicTimePicker /> */}
                 </div>

@@ -6,7 +6,7 @@ class Saat extends Component {
 
 
     render() {
-        const { alanAdi, defaultValue } = this.props;
+        const { alanAdi, gunId, girisCikisId, defaultValue } = this.props;
         return (
             <div >
                 <TextField
@@ -36,6 +36,8 @@ class Saat extends Component {
     updatedValue(evt, alanAdi) {
         const val = evt.target.value;
         console.log(alanAdi + " " + val);
+        console.log("GunId=" + this.props.gunId);
+        console.log("girisCikisId=" + this.props.girisCikisId)
     }
 
 }
