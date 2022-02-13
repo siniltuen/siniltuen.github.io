@@ -34,6 +34,8 @@ function GirisCikis(props) {
                 </div>
 
                 <div className="card-body">
+                    {/* {props.girisSaati} */}
+                    {/* {props.cikisSaati} */}
                     <Saat alanAdi={girisAdi + girisCikisSayisi} gunId={props.id} girisCikisId={girisCikisSayisi} />
                     <Saat alanAdi={cikisAdi + girisCikisSayisi} gunId={props.id} girisCikisId={girisCikisSayisi} />
                     {/* <BasicTimePicker /> */}

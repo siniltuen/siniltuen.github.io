@@ -1,5 +1,6 @@
-import { GIRIS_CIKIS_CIKART, GIRIS_CIKIS_EKLE } from '../types.js'
+import { GIRIS_CIKIS_CIKART, GIRIS_CIKIS_EKLE, SAAT_KAYDET } from '../types.js'
 import GirisCikis from '../../Components/GirisCikis'
+import Saat from '../../Components/Saat'
 const default_state = 5;
 
 const initialState = {
@@ -61,39 +62,60 @@ const reducer = (state = initialState, action) => {
             //     ...state,
             //     girisCikisSayisi: newArray,
             // }
-            const newArray = [...state.girisCikislar];
-            newArray[action.payload].count = newArray[action.payload].count + 1;
-            newArray[action.payload].girisCikisListesi.push(<GirisCikis key={newArray[action.payload].count} number={newArray[action.payload].count} girisCikisSayisi={newArray[action.payload].count} id={newArray[action.payload].id
-            } />)
+            {
+                const newArray = [...state.girisCikislar];
+                newArray[action.payload].count = newArray[action.payload].count + 1;
+                const id = newArray[action.payload].count;
+                newArray[action.payload].girisCikisListesi.push(<GirisCikis /*girisSaati={<Saat alanAdi={"Giriş Saati -" + id} gunId={id} girisCikisId={id} />}
+                    cikisSaati={<Saat alanAdi={"Çıkış Saati -" + id} gunId={id} girisCikisId={id} />} */ key={newArray[action.payload].count} number={newArray[action.payload].count} girisCikisSayisi={newArray[action.payload].count} id={newArray[action.payload].id
+                    } />)
 
-            return {
-                ...state,
-                girisCikislar: newArray,
+                return {
+                    ...state,
+                    girisCikislar: newArray,
+                }
             }
 
         case GIRIS_CIKIS_CIKART:
-            const newArrayRemove = [...state.girisCikislar];
-            console.log(action.payload);
-            for (var i = 0; i < newArrayRemove[action.payload.id].girisCikisListesi.length; i++) {
-                console.log("girisCikis" + i);
-                console.log(newArrayRemove[action.payload.id].girisCikisListesi[i]);
-            }
-            const filteredGirisCikis = newArrayRemove[action.payload.id].girisCikisListesi.filter(item => item.props.girisCikisSayisi !== action.payload.number);
-            // newArrayRemove[action.payload.id].girisCikisListesi.splice(action.payload.number - 1, 1);
-            newArrayRemove[action.payload.id].girisCikisListesi = filteredGirisCikis;
-            if (newArrayRemove[action.payload.id].count > 0) {
-                newArrayRemove[action.payload.id].count = newArrayRemove[action.payload.id].count - 1;
-            }
+            {
+                const newArrayRemove = [...state.girisCikislar];
+                console.log(action.payload);
 
-            console.log("new array remove after deletion:");
-            console.log(filteredGirisCikis);
-            return {
-                ...state,
-                girisCikislar: newArrayRemove,
+                const filteredGirisCikis = newArrayRemove[action.payload.id].girisCikisListesi.filter(item => item.props.girisCikisSayisi !== action.payload.number);
+                // newArrayRemove[action.payload.id].girisCikisListesi.splice(action.payload.number - 1, 1);
+                newArrayRemove[action.payload.id].girisCikisListesi = filteredGirisCikis;
+                if (newArrayRemove[action.payload.id].count > 0) {
+                    newArrayRemove[action.payload.id].count = newArrayRemove[action.payload.id].count - 1;
+                }
+
+                console.log("new array remove after deletion:");
+                console.log(filteredGirisCikis);
+                return {
+                    ...state,
+                    girisCikislar: newArrayRemove,
+                }
+            }
+        case SAAT_KAYDET:
+            {
+                const newArray = [...state.girisCikislar];
+                var selectedGirisCikis = newArray[action.payload.gunId].girisCikisListesi.filter(item => item.props.girisCikisSayisi === action.payload.girisCikisId);
+
+                console.log("Selected Giris Çıkış:");
+                console.log(selectedGirisCikis[0]);
+
+
+
+
+                return {
+                    ...state,
+                    girisCikislar: newArray,
+                }
             }
 
         default:
             return state;
+
+
     }
 
 
